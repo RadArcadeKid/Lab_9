@@ -9,7 +9,7 @@
     <!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 	<style>
-		#thermometer_inner { width: 95%; height: 20%; margin:2.5%; background: red; position:absolute; bottom:0;}
+		#thermometer_inner { width: 95%; height: 20%; margin:2.5%; background: gray; position:absolute; bottom:0;}
 		#thermometer_outer {height:400px; position:relative;}
 		#temp_today { color:white; text-align:center; position:relative; top:50%; }
 	</style>
@@ -93,7 +93,7 @@
 					3. temp_today : This will be updated to match the current temperature.
         */
         $('#temp_today').html(data.currently.temperature);
-        //console.log(data.currently.temperature);
+        //console.log("Current TEMP: " + data.currently.temperature);
 
         /*
 					4. thermometer_inner : Modify the height of the thermometer to match the current temperature. This means if the
@@ -101,6 +101,16 @@
 										   this thermometer has a lower boundary of 0 and upper boundary of 100.
         */
         $('#thermometer_inner').css("height", data.currently.temperature + "%");
+
+        //EXTRA CREDIT!
+        if(data.currently.temperature >= 85.0){
+          //console.log("current temp is greater than 85");
+          $('#thermometer_inner').css("background", "red");
+        }
+        if(data.currently.temperature <= 65.0){
+          //console.log("current temp is less than 85");
+          $('#thermometer_inner').css("background", "blue");
+        }
 
         /*
 					5. precip_today : This will be updated to match the current probability for precipitation.(make sure this is
