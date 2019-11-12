@@ -18,6 +18,14 @@
   	<div class="container">
 		<br>
 		<h1 style="text-align:center">Weather Forecast</h1>
+    <!-- Extra Credit Starts here!  -->
+    <div>
+      longitude: <input type="text" id="longitude" value="40.0150">N <br>
+      latitude: <input type="text" id="latitude" value="105.2705">W <br>
+    <input type="submit" value="submit" id="submit-button"> <!--Submit the actual values!-->
+    <!-- Extra Credit Ends here!  -->
+   </div>
+
 		<hr>
 		<div class="row">
 			<div class="col-4">
@@ -62,8 +70,22 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 	<script>
+  var url ='https://api.darksky.net/forecast/4925d262177a34633bdba6b272f9ac1d/37.8267,-122.4233'; //Place your DarkSky API Call Here
+
+  $('#submit-button').click(function(){
+      url = 'https://api.darksky.net/forecast/4925d262177a34633bdba6b272f9ac1d/' + $('#longitude').val() + "," + $('#latitude').val() + ';';
+      console.log(url);
+
+      $.ajax({url:url, success: function(result){
+          location.reload();
+      }});
+
+      //can't quite get the url to actually change with the API call....
+  });
+
 		$(document).ready(function() {
-			var url ='https://api.darksky.net/forecast/4925d262177a34633bdba6b272f9ac1d/37.8267,-122.4233'; //Place your DarkSky API Call Here
+      console.log(url);
+
 			$.ajax({url:url, dataType:"jsonp"}).then(function(data) {
         console.log(data);//Review all of the data returned
     		console.log("Current Temp: " + data.currently.apparentTemperature);//View Today's Temp
